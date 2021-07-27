@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.2.17" />
     <PackageReference Include="FluentNHibernate" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
@@ -26,6 +27,10 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="DataAccess\Migrations\" />
     <Folder Include="Logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NetflixClone.Foundation\NetflixClone.Foundation.csproj" />
   </ItemGroup>
 
 </Project>
