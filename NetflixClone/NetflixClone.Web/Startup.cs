@@ -1,3 +1,4 @@
+using FluentNHibernate.Cfg;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NetflixClone.Web.Data;
+using System.Linq;
 
 namespace NetflixClone.Web
 {
@@ -28,6 +30,33 @@ namespace NetflixClone.Web
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+
+            services.AddSingleton<NHibernate.ISessionFactory>(factory =>
+            {
+                return Fluently
+                            .Configure()
+                            .Database(() =>
+                            {
+
+                                return FluentNHibernate.Cfg.Db.MsSqlConfiguration
+                                        .MsSql2012
+                                        .ShowSql()
+                                        .ConnectionString(connectionString);
+                            })
+                            .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Startup>())
+                            .BuildSessionFactory();
+            });
+
+            services.AddScoped<NHibernate.ISession>(factory =>
+               factory
+                    .GetServices<NHibernate.ISessionFactory>()
+                    .First()
+                    .OpenSession()
+            );
+
+
             services.AddControllersWithViews();
         }
 
