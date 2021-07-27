@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using NetflixClone.Web.Helpers;
 using NetflixClone.Web.Models;
 
 namespace NetflixClone.Web
@@ -17,6 +18,8 @@ namespace NetflixClone.Web
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ErrorViewModel>().AsSelf();
+            builder.RegisterType<FileUploadHelper>().As<IFileUploadHelper>()
+                .InstancePerLifetimeScope();
 
             base.Load(builder);
         }

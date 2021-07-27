@@ -13,7 +13,7 @@ namespace NetflixClone.Web
     {
         public static void Main(string[] args)
         {
-            //Database.RunMigrations();
+            Database.RunMigrations();
 
             var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json", false)
                .AddEnvironmentVariables()

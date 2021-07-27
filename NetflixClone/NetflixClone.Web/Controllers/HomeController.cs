@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NetflixClone.Web.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NetflixClone.Web.Controllers
 {
@@ -20,7 +16,7 @@ namespace NetflixClone.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+           return View();
         }
 
         public IActionResult Privacy()
