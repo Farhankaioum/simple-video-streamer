@@ -25,12 +25,16 @@ namespace NetflixClone.Foundation
                 .InstancePerLifetimeScope();
             builder.RegisterType<SubscriptionTypeService>().As<ISubscriptionTypeService>()
                .InstancePerLifetimeScope();
+            builder.RegisterType<PlayingErrorService>().As<IPlayingErrorService>()
+               .InstancePerLifetimeScope();
 
             builder.RegisterType<Repository<Video, Guid>>().As<IRepository<Video, Guid>>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<Repository<VideoCategory, int>>().As<IRepository<VideoCategory, int>>()
                 .InstancePerLifetimeScope();
             builder.RegisterType<Repository<SubscriptionType, int>>().As<IRepository<SubscriptionType, int>>()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<Repository<PlayingError, Guid>>().As<IRepository<PlayingError, Guid>>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);

@@ -18,10 +18,12 @@
             <div class="card text-left">
                 <img src="/images/thambnail.png" class="card-img-top" alt="Card image cap">
                 <div class="card-body text-center">
-                    <h5 class="card-title text-left">@video.Title</h5>
+                    <h5 class="card-title text-left">
+                        <a class="text-dark" asp-controller="Videos" asp-action="Detail" asp-route-id="@video.Id">@video.Title</a>
+                    </h5>
                     <p class="card-text text-left">@video.Description</p>
                     <div class="text-left">
-                        <a asp-controller="Home" asp-action="Details" asp-route-id="@video" class="btn btn-outline-success btn-sm mr-2">Watch</a>
+                        <a asp-controller="Videos" asp-action="Detail" asp-route-id="@video.Id" class="btn btn-outline-success btn-sm mr-2">Watch</a>
                     </div>
                 </div>
             </div>

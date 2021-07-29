@@ -22,5 +22,6 @@ namespace NetflixClone.Web.Models.VideoViewModel
         {
             VideoList = _videoService.VideoList();
         }
+
     }
 }
