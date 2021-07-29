@@ -13,10 +13,10 @@ function submitError(errorMessage, durationTime) {
         contentType: 'application/x-www-form-urlencoded',
         data: data,
         success: function (data) {
-            alert('added successfully');
+            console.log('added successfully');
         },
         error: function (data) {
-            alert('Unsuccessfull');
+            console.log('Unsuccessfull');
         }
     });
 }

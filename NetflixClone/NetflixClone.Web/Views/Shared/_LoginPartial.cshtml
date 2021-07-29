@@ -18,7 +18,7 @@
                 <img style="width:40px;height:40px; object-fit:cover; border-radius:30px;" src="@userImage" asp-append-version="true">
             </a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Profile" title="Manage" asp-route-userId="@userId">Profile</a>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Profile" title="Manage">Profile</a>
                 <a class="dropdown-item" href="#">Discussions</a>
                 <form class="form-inline dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                     <button type="submit" class="mt-0 pt-0 nav-link btn btn-link text-dark pl-0">Logout</button>
