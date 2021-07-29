@@ -6,11 +6,11 @@ namespace NetflixClone.Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected readonly UserManager<ApplicationUser> _userManager;
+        protected readonly UserManager<ApplicationUser> UserManager;
 
         public BaseController(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;
+            UserManager = userManager;
         }
     }
 }

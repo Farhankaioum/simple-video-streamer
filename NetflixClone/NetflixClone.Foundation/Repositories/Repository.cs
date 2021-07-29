@@ -1,4 +1,5 @@
 ﻿using NHibernate;
+using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,13 @@ namespace NetflixClone.Foundation.Repositories
             return session.Query<TEntity>().ToList();
         }
 
+        public IList<TEntity> GetList(string includeProperties)
+        {
+            using var session = _sessionFactory.OpenSession();
+            return session.Query<TEntity>()
+                .ToList();
+        }
+
         public IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null)
         {
             using var session = _sessionFactory.OpenSession();
@@ -33,6 +41,12 @@ namespace NetflixClone.Foundation.Repositories
         }
 
         public TEntity GetById(TKey id)
+        {
+            using var session = _sessionFactory.OpenSession();
+            return session.Get<TEntity>(id);
+        }
+
+        public TEntity GetById(TKey id, string includeProperties = "")
         {
             using var session = _sessionFactory.OpenSession();
             return session.Get<TEntity>(id);

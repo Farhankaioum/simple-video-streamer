@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FluentNHibernate.Cfg;
@@ -54,8 +55,10 @@ namespace NetflixClone.Web
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly(migrationAssemblyName)));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -79,8 +82,9 @@ namespace NetflixClone.Web
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
 
-                options.LoginPath = "/Identity/Account/Login";
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = $"/Account/Login";
+                options.LogoutPath = $"/Account/Login";
+                options.AccessDeniedPath = "/Account/Login";
                 options.SlidingExpiration = true;
             });
 
@@ -118,6 +122,8 @@ namespace NetflixClone.Web
                 .First()
                 .OpenSession()
             );
+
+            services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 
             services.AddControllersWithViews();
         }

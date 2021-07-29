@@ -1,0 +1,184 @@
+﻿@model RegisterModel
+@using NetflixClone.Web.Helpers
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .form-control {
+        height: 30px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .error {
+        color: red;
+    }
+        .form-control:focus {
+            border-color: #5cb85c;
+        }
+
+    .form-control, .btn {
+        border-radius: 3px;
+    }
+    .signup-form {
+        width: 450px;
+        margin: 0 auto;
+        padding: 30px 0;
+        font-size: 15px;
+    }
+
+    .signup-form h2 {
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+
+        .signup-form h2:before, .signup-form h2:after {
+            content: "";
+            height: 2px;
+            width: 30%;
+            background: #d4d4d4;
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+        }
+
+        .signup-form h2:before {
+            left: 0;
+        }
+
+        .signup-form h2:after {
+            right: 0;
+        }
+
+    .signup-form .hint-text {
+        color: #999;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .signup-form form {
+        color: #999;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        background: #f2f3f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 35px;
+    }
+
+    .signup-form .form-group {
+        margin-bottom: 5px;
+    }
+
+    .signup-form input[type="checkbox"] {
+        margin-top: 5px;
+    }
+
+    .signup-form .btn {
+        font-size: 16px;
+        font-weight: bold;
+        min-width: 140px;
+        outline: none !important;
+    }
+
+    .signup-form .row div:first-child {
+        padding-right: 10px;
+    }
+
+    .signup-form .row div:last-child {
+        padding-left: 10px;
+    }
+
+    .signup-form a {
+        color: #fff;
+        text-decoration: underline;
+    }
+        .signup-form a:hover {
+            text-decoration: none;
+        }
+
+    .signup-form form a {
+        color: #5cb85c;
+        text-decoration: none;
+    }
+
+        .signup-form form a:hover {
+            text-decoration: underline;
+        }
+    .country-list {
+        font-size: 12px;
+    }
+    .account-type {
+        margin-bottom: 10px;
+    }
+</style>
+<body>
+    <div class="signup-form">
+        <form name="myForm" onsubmit="return validateForm()" asp-route-returnUrl="@Model.ReturnUrl" method="post" asp-controller="Account" asp-action="Register">
+            <h2>Sign Up</h2>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <b><label asp-for="FullName"></label></b>
+                <input asp-for="FullName" class="form-control"/>
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b><label asp-for="Email"></label></b>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <b><label asp-for="Password"></label></b>
+                        <input asp-for="Password" class="form-control"/>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <b><label asp-for="ConfirmPassword"></label></b>
+                        <input asp-for="ConfirmPassword" class="form-control"/>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <b><label asp-for="Country"></label></b><br/>
+                        <select asp-for="Country" class="custom-select country-list"
+                                asp-items="@(new SelectList(CountryApi.CountryTypes,"Name","Name"))">
+                            <option>Select country</option>
+                        </select>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                    <div class="col">
+                        <b><label asp-for="City"></label></b>
+                        <input asp-for="City" class="form-control"/>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+            <div class="form-group">
+                <label class="form-check-label">
+                    <input type="checkbox" asp-for="AccountAgreement"> I accept the <a href="#">Terms of Use</a> &amp;
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" value="Send" class="btn btn-success btn-lg btn-block">Register Now</button>
+            </div>
+            <div class="text-center">Already have an account? <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Sign in</a></div>
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

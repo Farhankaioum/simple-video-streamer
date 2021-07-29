@@ -14,6 +14,13 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" asp-items="@(new SelectList(Model.CategoryList, "Id", "Name"))" class="form-control">
+                    <option value="">Select Genre</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Description"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
@@ -23,14 +30,14 @@
                 <div class="custom-file">
                     <input asp-for="File"
                            class="form-control custom-file-input"
-                            />
+                           accept=".mp4" />
                     <label class="custom-file-label">Choose File...</label>
                 </div>
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" value="Back" class="ml-2 btn btn-danger" />
-                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-controller="Video" asp-action="Index" class="btn btn-danger"> Back </a>
+                <input type="submit" value="Save" class="btn btn-success ml-2" />
             </div>
         </form>
     </div>

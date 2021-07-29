@@ -15,6 +15,7 @@
 **.user
 **.sln.docstates
 **PublishProfiles
+*.mp4
 -
 -# Build results
 -[Dd]ebug/

@@ -1,0 +1,39 @@
+﻿@model CategoryIndexViewModel
+
+@{
+    ViewBag.Title = "Index Page";
+}
+
+<div class="container-fluid">
+    <div class="float-right mt-4 mb-2">
+        <a asp-controller="Category" asp-action="Create" class="btn btn-info">Create new</a>
+    </div>
+    @if (Model.CategoryList.Count > 0)
+    {
+        <table class="table">
+            <tr>
+                <td>Name</td>
+                <td>Action</td>
+            </tr>
+            @foreach (var category in Model.CategoryList)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>
+                        <div class="form-group">
+                            <input type="button" value="Edit" class="btn btn-success" />
+                            <input type="button" value="Delete" class="btn btn-danger" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div>
+            <h4>No records found!</h4>
+        </div>
+    }
+
+</div>

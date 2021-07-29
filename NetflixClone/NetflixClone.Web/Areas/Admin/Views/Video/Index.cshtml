@@ -1,0 +1,47 @@
+﻿@model VideoIndexViewModel
+
+@{
+    ViewBag.Title = "Index Page";
+}
+
+<div class="container-fluid">
+    <div class="float-right mt-4 mb-2">
+        <a asp-controller="Video" asp-action="Create" class="btn btn-info">Create new</a>
+    </div>
+    @if (Model.VideoList.Count > 0) {
+        <table class="table">
+            <tr>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Release Date</td>
+                <td>Category</td>
+                <td>Action</td>
+            </tr>
+            @foreach (var video in Model.VideoList)
+            {
+                <tr>
+                    <td>@video.Title</td>
+                    <td>@video.Description</td>
+                    <td>@video.Description</td>
+                    <td>@video.ReleaseDate.ToString("dd MM yyyy")</td>
+                    <td>@video.CategoryId</td>
+                    <td>
+                        <video src="@Url.Content("~/videos/"+video.VideoUrl)" controls height="70" width="70" />
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="button" value="Edit" class="btn btn-success" />
+                            <input type="button" value="Delete" class="btn btn-danger" />
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }else
+    {
+        <div>
+            <h4>No records found!</h4>
+        </div>
+    }
+    
+</div>

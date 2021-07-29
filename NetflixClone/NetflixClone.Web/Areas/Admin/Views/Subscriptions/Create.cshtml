@@ -1,0 +1,24 @@
+﻿@model SubscriptionCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container-fluid">
+    <form method="post" asp-controller="Subscriptions" asp-action="Create">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a asp-controller="Subscriptions" asp-action="Index" class="btn btn-danger">Back</a>
+            <input type="submit" value="Save" class="btn btn-success ml-2" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

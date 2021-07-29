@@ -1,27 +1,38 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using NetflixClone.Foundation.Entities; 
+@using NetflixClone.Foundation.Entities;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+@{
+    var userId = UserManager.GetUserId(User);
 }
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
+
+<ul class="navbar-nav ml-1">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var userImage = "/images/user-icon.jpg";
+
+        <li class="nav-item dropdown layout-nav without-caret-dropdown" style="margin-top:-8px;">
+            <a class="nav-link text-white dropdown-toggle social-item" data-toggle="dropdown" title="Your Profile's"
+               asp-area="" asp-controller="" asp-action="">
+                <img style="width:40px;height:40px; object-fit:cover; border-radius:30px;" src="@userImage" asp-append-version="true">
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Profile" title="Manage" asp-route-userId="@userId">Profile</a>
+                <a class="dropdown-item" href="#">Discussions</a>
+                <form class="form-inline dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="mt-0 pt-0 nav-link btn btn-link text-dark pl-0">Logout</button>
+                </form>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item layout-nav">
+            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </li>
+        <li class="nav-item layout-nav">
+            <a class="nav-link text-white" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+        </li>
+    }
 </ul>

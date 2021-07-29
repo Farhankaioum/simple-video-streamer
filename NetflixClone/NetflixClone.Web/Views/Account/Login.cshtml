@@ -1,0 +1,153 @@
+﻿@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .form-control {
+        height: 30px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+        .form-control:focus {
+            border-color: #5cb85c;
+        }
+
+    .form-control, .btn {
+        border-radius: 3px;
+    }
+    .signup-form {
+        width: 450px;
+        margin: 0 auto;
+        padding: 30px 0;
+        font-size: 15px;
+    }
+    .signup-form h2 {
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+       .signup-form h2:before, .signup-form h2:after {
+            content: "";
+            height: 2px;
+            width: 30%;
+            background: #d4d4d4;
+            position: absolute;
+            top: 50%;
+            z-index: 2;
+        }
+
+        .signup-form h2:before {
+            left: 0;
+        }
+
+        .signup-form h2:after {
+            right: 0;
+        }
+
+    .signup-form .hint-text {
+        color: #999;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .signup-form form {
+        color: #999;
+        border-radius: 3px;
+        margin-bottom: 15px;
+        background: #f2f3f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 35px;
+        fon
+    }
+
+    .signup-form .form-group {
+        margin-bottom: 5px;
+    }
+
+    .signup-form input[type="checkbox"] {
+        margin-top: 5px;
+    }
+
+    .signup-form .btn {
+        font-size: 16px;
+        font-weight: bold;
+        min-width: 140px;
+        outline: none !important;
+    }
+
+    .signup-form .row div:first-child {
+        padding-right: 10px;
+    }
+
+    .signup-form .row div:last-child {
+        padding-left: 10px;
+    }
+
+    .signup-form a {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+        .signup-form a:hover {
+            text-decoration: none;
+        }
+
+    .signup-form form a {
+        color: #5cb85c;
+        text-decoration: none;
+    }
+
+        .signup-form form a:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="signup-form">
+    <form id="account" method="post" asp-controller="Account" asp-action="Login">
+        <h2>Sign In</h2>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="form-group">
+            <b><label asp-for="Email"></label></b>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <b><label asp-for="Password"></label></b>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <b><label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                       @Html.DisplayNameFor(m => m.RememberMe)
+                    </label></b>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" value="Submit" class="btn btn-success btn-lg btn-block">Login Now</button>
+        </div>
+        <div class="form-group">
+            <b>
+                <a id="forgot-password" asp-controller="Account" asp-action="ForgotPassword">Forgot your password?</a>
+            </b>
+            <b>
+                <p>
+                <a asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </p>
+            </b>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
