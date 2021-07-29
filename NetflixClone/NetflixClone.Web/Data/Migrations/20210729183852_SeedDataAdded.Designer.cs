@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetflixClone.Foundation.Contexts;
 
 namespace NetflixClone.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210729183852_SeedDataAdded")]
+    partial class SeedDataAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,15 +278,14 @@ namespace NetflixClone.Web.Data.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0df8bca8-90de-4d76-b1ff-d8fbffcc96a1",
+                            ConcurrencyStamp = "8f45f72b-e8f5-4b6c-8cb7-373d17eebef4",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Admin",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEBoESAdBkzMc6QAZZMNxT5kobit67JRch4TuLfcN8J0NihfP6iOaAf+YL0sKiIpScw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "86866665-fab6-4b7e-bdfa-9b58ea7fc898",
+                            SecurityStamp = "e6b6b8c6-cfbf-44b2-a086-453dabb3cef7",
                             SubscriptionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -293,15 +294,14 @@ namespace NetflixClone.Web.Data.Migrations
                         {
                             Id = "791056c5-9f75-4d0f-b814-2670fdad2ad7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c293918-75a2-44bb-acf6-8b004c057b9c",
+                            ConcurrencyStamp = "bcaab3d3-ef6b-4d76-bff2-f83ef1cb3a20",
                             Email = "user@gmail.com",
                             EmailConfirmed = false,
                             FullName = "User",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELbMeVaNhJygIIaFqNf8SjluEN2vtPipXiXSRK3Kx/c31fB/AsjxYnMuwx1m4osBJw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "83fca165-494a-4847-98b4-f0283c273456",
+                            SecurityStamp = "5a7c820a-1696-4528-861a-69b825bb09c5",
                             SubscriptionDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TwoFactorEnabled = false,
                             UserName = "User"

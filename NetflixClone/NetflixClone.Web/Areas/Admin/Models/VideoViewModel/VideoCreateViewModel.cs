@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetflixClone.Web.Areas.Admin.Models.VideoViewModel
 {
-    public class VideoCreateViewModel
+    public class VideoCreateViewModel : AdminBaseModel
     {
         private readonly IVideoService _videoService;
         private readonly ICategoryService _categoryService;

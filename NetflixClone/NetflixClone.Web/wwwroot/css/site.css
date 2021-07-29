@@ -92,3 +92,44 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: 200;
 }
+
+/* subscription design*/
+.cid-qvcYRwXFky .plan {
+    word-break: break-word;
+    position: relative;
+    max-width: 300px;
+    padding-right: 0;
+    padding-left: 0;
+    color: #767676;
+}
+.cid-qvcYRwXFky .plan-header, .cid-qvcYRwXFky .plan-body {
+    background-color: #fff;
+}
+.cid-qvcYRwXFky .plan-header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.display-5 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.5rem;
+}
+.cid-qvcYRwXFky .price-value {
+    font-weight: 700;
+    vertical-align: top;
+}
+.cid-qvcYRwXFky .price-figure {
+    font-weight: 700;
+    color: #232323;
+}
+.display-1 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 4.25rem;
+}
+.display-7 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+}
+.small, small {
+    font-size: 80%;
+    font-weight: 400;
+}

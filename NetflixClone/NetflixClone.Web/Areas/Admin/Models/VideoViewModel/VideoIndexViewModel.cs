@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NetflixClone.Web.Areas.Admin.Models.VideoViewModel
 {
-    public class VideoIndexViewModel
+    public class VideoIndexViewModel : AdminBaseModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

@@ -1,0 +1,74 @@
+﻿@model SubscriptionIndexViewModel
+@using Microsoft.AspNetCore.Identity
+@using NetflixClone.Foundation.Entities;
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewBag.Title = "Subscription page";
+}
+
+<div class="row justify-content-around">
+    @foreach (var subscription in Model.SubscriptionList)
+    {
+    <div class="plan-body col-4 mx-2 my-2  col-lg-3" style="border: 1px solid red">
+        <div class="plan-header text-center pt-5">
+            <h3 class="plan-title mbr-fonts-style display-5">
+                @subscription.Name
+            </h3>
+            <div class="plan-price">
+                <span class="price-value mbr-fonts-style display-5">
+                    $
+                </span>
+                <span class="price-figure mbr-fonts-style display-1">
+                    @subscription.Price
+                </span>
+                <small class="price-term mbr-fonts-style display-7">
+
+                    @if (subscription.DurationInMonth == 1)
+                    {
+                        <span>@subscription.DurationInMonth month</span>
+                    }
+                    @if (subscription.DurationInMonth > 1 && subscription.DurationInMonth < 12)
+                    {
+                        <span>@subscription.DurationInMonth months</span>
+                    }
+                    @if (subscription.DurationInMonth >= 12)
+                    {
+                        <span>@{ var value = subscription.DurationInMonth / 12; } @value year</span>
+                    }
+                </small>
+            </div>
+        </div>
+        <div class="plan-body">
+            <div class="plan-list align-center">
+                <ul class="list-group list-group-flush mbr-fonts-style display-7">
+                    <li class="list-group-item">
+                        @subscription.Description
+                    </li>
+                    <li class="list-group-item">
+                        @subscription.ShortDescription
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @{
+            var user = await UserManager.GetUserAsync(User);
+            if (user.SubscriptionTypeId != null && user.SubscriptionTypeId == subscription.Id)
+            {
+                <div class="row justify-content-center text-info">Already Subcribed</div>
+            }
+            else
+            {
+                <div class="row justify-content-center">
+                    <form method="post" asp-controller="Subscription" asp-action="ApplySubscription" asp-route-id="@subscription.Id">
+                        <button type="submit" class="btn btn-primary text-center my-4 mb-1">Subscribe</button>
+                    </form>
+                </div>
+            }
+        }
+
+    </div>
+    }
+
+</div>
+

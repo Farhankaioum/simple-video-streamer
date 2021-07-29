@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace NetflixClone.Web.Areas.Admin.Models.CategoryViewModel
 {
-    public class CategoryCreateViewModel
+    public class CategoryCreateViewModel : AdminBaseModel
     {
         private readonly ICategoryService _categoryService;
 

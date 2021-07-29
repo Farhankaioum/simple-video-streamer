@@ -7,9 +7,11 @@ using NetflixClone.Web.Models.VideoViewModel;
 using System;
 using System.Security.Claims;
 using X.PagedList;
+using NetflixClone.Foundation.Helpers;
 
 namespace NetflixClone.Web.Controllers
 {
+    [Authorize(Roles = ConstantValue.SUBSCRIBE_USER_ROLE)]
     public class VideosController : BaseController
     {
         private readonly ILogger<VideosController> _logger;

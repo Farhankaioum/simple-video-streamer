@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace NetflixClone.Web.Areas.Admin.Models.CategoryViewModel
 {
-    public class CategoryIndexViewModel
+    public class CategoryIndexViewModel : AdminBaseModel
     {
         private readonly ICategoryService _categoryService;
 

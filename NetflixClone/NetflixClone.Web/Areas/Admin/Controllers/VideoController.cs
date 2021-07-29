@@ -1,16 +1,19 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NetflixClone.Foundation.Entities;
+using foundationHelper = NetflixClone.Foundation.Helpers;
 using NetflixClone.Web.Areas.Admin.Models.VideoViewModel;
 using NetflixClone.Web.Controllers;
-using NetflixClone.Web.Helpers;
 using System;
+using NetflixClone.Web.Helpers;
 
 namespace NetflixClone.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = foundationHelper.ConstantValue.ADMIN_USER_ROLE)]
     public class VideoController : BaseController
     {
         private readonly ILogger<VideoController> _logger;

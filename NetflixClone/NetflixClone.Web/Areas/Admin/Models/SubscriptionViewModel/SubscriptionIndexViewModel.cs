@@ -1,15 +1,21 @@
 ﻿using Autofac;
 using NetflixClone.Foundation.Services;
+using System;
 using System.Collections.Generic;
 
 namespace NetflixClone.Web.Areas.Admin.Models.SubscriptionViewModel
 {
-    public class SubscriptionIndexViewModel
+    public class SubscriptionIndexViewModel : AdminBaseModel
     {
         private readonly ISubscriptionTypeService _subscriptionTypeService;
 
         public string Name { get; set; }
         public int Id { get; set; }
+        public string Description { get; set; }
+        public string ShortDescription { get; set; }
+        public double Price { get; set; }
+        public int DurationInMonth { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public List<SubscriptionIndexViewModel> SubscriptionList { get; set; }
 
@@ -27,7 +33,12 @@ namespace NetflixClone.Web.Areas.Admin.Models.SubscriptionViewModel
                 SubscriptionList.Add(new SubscriptionIndexViewModel
                 {
                     Id = category.Id,
-                    Name = category.Name
+                    Name = category.Name,
+                    Description = category.Description,
+                    ShortDescription = category.ShortDescription,
+                    Price = category.Price,
+                    DurationInMonth = category.DurationInMonth,
+                    CreatedAt = category.CreatedAt
                 });
             }
         }

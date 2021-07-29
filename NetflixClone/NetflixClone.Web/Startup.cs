@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using NetflixClone.Foundation;
 using NetflixClone.Foundation.Contexts;
 using NetflixClone.Foundation.Entities;
+using NetflixClone.Web.SeedHelper;
 using System;
 using System.Linq;
 
@@ -128,7 +129,7 @@ namespace NetflixClone.Web
             services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager)
         {
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
@@ -162,6 +163,8 @@ namespace NetflixClone.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            ApplicationDbInitializer.SeedUsers(userManager);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NetflixClone.Foundation.Entities;
+using NetflixClone.Foundation.Helpers;
 using NetflixClone.Web.Areas.Admin.Models.CategoryViewModel;
 using NetflixClone.Web.Controllers;
 using System;
@@ -10,6 +12,7 @@ using System;
 namespace NetflixClone.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = ConstantValue.ADMIN_USER_ROLE)]
     public class CategoryController : BaseController
     {
         private readonly ILogger<CategoryController> _logger;

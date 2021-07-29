@@ -10,12 +10,6 @@
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var url = string.IsNullOrWhiteSpace(Model.Input.PhotoUrl) ? "/images/user-icon.jpg" : $"/videos/{Model.Input.PhotoUrl}";
-
-}
-
-@section Styles{
-
-    <link href="~/css/profile.css" rel="stylesheet" />
 }
 
 <div><div class="container">
