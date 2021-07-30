@@ -7,20 +7,20 @@ namespace NetflixClone.Web.DataAccess.Migrations
     {
         public override void Up()
         {
-            Create.Table("Videos")
+            const string tableName = "Videos";
+            const string categoryIdColumn = "CategoryId";
+
+            Create.Table(tableName)
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable()
                 .WithColumn("Title").AsString().NotNullable()
                 .WithColumn("Description").AsString().NotNullable()
                 .WithColumn("ReleasedDate").AsDateTime2().NotNullable()
-                .WithColumn("CategoryId").AsInt32().Nullable()
+                .WithColumn(categoryIdColumn).AsInt32().Nullable()
                 .WithColumn("Url").AsString().NotNullable();
 
-            const string tableName = "Videos";
-            const string todoListIdColumn = "CategoryId";
-
-            Create.Index($"IDX_{tableName}_{todoListIdColumn}")
-            .OnTable(tableName)
-            .OnColumn(todoListIdColumn);
+            Create.ForeignKey()
+                .FromTable(tableName).ForeignColumn(categoryIdColumn)
+                .ToTable("Categories").PrimaryColumn("Id");
         }
     }
 }
