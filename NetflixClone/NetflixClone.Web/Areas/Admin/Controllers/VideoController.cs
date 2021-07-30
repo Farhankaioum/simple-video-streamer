@@ -36,7 +36,7 @@ namespace NetflixClone.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = new VideoIndexViewModel();
-            model.LoadData();
+            model.LoadModelData();
             return View(model);
         }
 
@@ -80,30 +80,57 @@ namespace NetflixClone.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Edit(Guid id)
         {
-            var model = new VideoCreateViewModel();
+            var model = new VideoEditViewModel();
+            model.GetVideoById(id);
+            model.LoadModelData();
             return View(model);
         }
 
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = 104857600)]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(VideoCreateViewModel model)
+        public IActionResult Edit(VideoEditViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
             try
             {
-                var fileName = _fileUploadHelper.UploadFile(model.File);
-                model.VideoUrl = fileName;
-                model.CreateVideo();
+                if(model.File.Length > 0)
+                {
+                    var fileName = _fileUploadHelper.UploadFile(model.File);
+                    model.VideoUrl = fileName;
+                }
+                
+                model.EditVideo();
                 _notyf.Success("Update successfully!");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message, ex);
-                _notyf.Error("Error occured!");
+                _notyf.Error(ex.Message);
             }
 
+            model.LoadModelData();
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var model = new VideoIndexViewModel();
+                model.DeleteVideo(id);
+                _notyf.Success("Delete successfully!");
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                _notyf.Error(ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

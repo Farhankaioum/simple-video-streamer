@@ -6,11 +6,6 @@ namespace NetflixClone.Foundation.Entities
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
-        public virtual IList<Video> Videos { get; set; }
-
-        public VideoCategory()
-        {
-            Videos = new List<Video>();
-        }
+        public virtual IList<Video> Videos { get; set; } = new List<Video>();
     }
 }

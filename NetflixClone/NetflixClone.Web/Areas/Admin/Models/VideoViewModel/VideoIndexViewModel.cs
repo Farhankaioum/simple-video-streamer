@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using NetflixClone.Foundation.Exceptions;
 using NetflixClone.Foundation.Services;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace NetflixClone.Web.Areas.Admin.Models.VideoViewModel
             _videoService = Startup.AutofacContainer.Resolve<IVideoService>();
         }
 
-        public void LoadData()
+        public void LoadModelData()
         {
             var videoList = _videoService.VideoList();
             foreach(var video in videoList)
@@ -38,6 +39,15 @@ namespace NetflixClone.Web.Areas.Admin.Models.VideoViewModel
                     VideoUrl = video.Url
                 });
             }
+        }
+
+        public void DeleteVideo(Guid id)
+        {
+            var existingVideo = _videoService.GetVideoById(id);
+            if (existingVideo == null)
+                throw new NotFoundException("Video not found!");
+
+            _videoService.DeleteVideo(existingVideo);
         }
     }
 }

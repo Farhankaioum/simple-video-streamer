@@ -7,15 +7,17 @@ namespace NetflixClone.Web.DataAccess.Maps
     {
         public VideoMap()
         {
+            Table("Videos");
+
             Id(x => x.Id);
             Map(x => x.Title);
             Map(x => x.Description);
             Map(x => x.Url);
             Map(x => x.ReleasedDate);
-            Table("Videos");
 
             References(x => x.Category)
-                .Column("CategoryId").Nullable()
+                .Column("CategoryId")
+                .Nullable()
                 .Cascade.All();
         }
     }

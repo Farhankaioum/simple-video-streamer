@@ -54,6 +54,7 @@ namespace NetflixClone.Web.Areas.Admin.Controllers
             {
                 model.Create();
                 _notyf.Success("Category added successful!");
+                return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
             {
@@ -62,6 +63,55 @@ namespace NetflixClone.Web.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = new CategoryEditViewModel();
+            model.GetCategoryById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(CategoryEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                model.Edit();
+                _notyf.Success("Category update successful!");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _notyf.Error(ex.Message);
+                _logger.LogError(ex.Message, ex);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var model = new CategoryIndexViewModel();
+                model.DeleteCategory(id);
+                _notyf.Success("Category delete successful!");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                _notyf.Error(ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

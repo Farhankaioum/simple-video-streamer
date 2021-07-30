@@ -22,7 +22,6 @@
                 <tr>
                     <td>@video.Title</td>
                     <td>@video.Description</td>
-                    <td>@video.Description</td>
                     <td>@video.ReleaseDate.ToString("dd MM yyyy")</td>
                     <td>@video.CategoryId</td>
                     <td>
@@ -30,8 +29,10 @@
                     </td>
                     <td>
                         <div class="form-group">
-                            <input type="button" value="Edit" class="btn btn-success" />
-                            <input type="button" value="Delete" class="btn btn-danger" />
+                            <a class="btn btn-success float-left" asp-controller="Video" asp-action="Edit" asp-route-id="@video.Id">Edit </a>
+                            <form method="post" asp-controller="Video" asp-action="Delete" asp-route-id="@video.Id">
+                                <button type="submit" class="btn btn-danger ml-2" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

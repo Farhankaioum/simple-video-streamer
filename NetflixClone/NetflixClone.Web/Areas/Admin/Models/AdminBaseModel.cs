@@ -18,17 +18,17 @@ namespace NetflixClone.Web.Areas.Admin.Models
         {
             UserManager = userManager;
             HttpContextAccessor = httpContextAccessor;
-            LoadModel();
+            LoadUserData();
         }
 
         public AdminBaseModel()
         {
             UserManager = Startup.AutofacContainer.Resolve<UserManager<ApplicationUser>>();
             HttpContextAccessor = Startup.AutofacContainer.Resolve<IHttpContextAccessor>();
-            LoadModel();
+            LoadUserData();
         }
 
-        public void LoadModel()
+        public void LoadUserData()
         {
             var user = UserManager.GetUserAsync(HttpContextAccessor.HttpContext.User).Result;
 

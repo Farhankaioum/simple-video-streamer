@@ -15,9 +15,12 @@ namespace NetflixClone.Web.DataAccess.Migrations
                 .WithColumn("CategoryId").AsInt32().Nullable()
                 .WithColumn("Url").AsString().NotNullable();
 
-            Create.ForeignKey("FK_Videos_Categories")
-                .FromTable("Videos").ForeignColumn("CategoryId")
-                .ToTable("Categories").PrimaryColumn("Id");
+            const string tableName = "Videos";
+            const string todoListIdColumn = "CategoryId";
+
+            Create.Index($"IDX_{tableName}_{todoListIdColumn}")
+            .OnTable(tableName)
+            .OnColumn(todoListIdColumn);
         }
     }
 }

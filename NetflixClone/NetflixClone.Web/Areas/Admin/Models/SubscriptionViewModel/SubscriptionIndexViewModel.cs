@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using NetflixClone.Foundation.Exceptions;
 using NetflixClone.Foundation.Services;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,15 @@ namespace NetflixClone.Web.Areas.Admin.Models.SubscriptionViewModel
                     CreatedAt = category.CreatedAt
                 });
             }
+        }
+
+        public void DeleteSubscription(int id)
+        {
+            var existingSubscription = _subscriptionTypeService.GetSubscriptionById(id);
+            if (existingSubscription == null)
+                throw new NotFoundException("Subscription package not found");
+
+            _subscriptionTypeService.DeleteSubscription(existingSubscription);
         }
     }
 }

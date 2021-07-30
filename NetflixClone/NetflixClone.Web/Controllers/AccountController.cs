@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using NetflixClone.Foundation.Entities;
 using NetflixClone.Web.Helpers;
 using NetflixClone.Web.Models.AccountModels;
+using foundationHelper = NetflixClone.Foundation.Helpers;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -135,6 +136,10 @@ namespace NetflixClone.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    if (await _userManager.IsInRoleAsync(await _userManager.FindByNameAsync(model.UserName), foundationHelper.ConstantValue.ADMIN_USER_ROLE))
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

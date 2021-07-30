@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using NetflixClone.Foundation.Exceptions;
 using NetflixClone.Foundation.Services;
 using System.Collections.Generic;
 
@@ -30,6 +31,15 @@ namespace NetflixClone.Web.Areas.Admin.Models.CategoryViewModel
                     Name = category.Name
                 });
             }
+        }
+
+        public void DeleteCategory(int id)
+        {
+            var existingCategory = _categoryService.GetCategoryById(id);
+            if (existingCategory == null)
+                throw new NotFoundException("Category not found");
+
+            _categoryService.DeleteCategory(existingCategory);
         }
     }
 }

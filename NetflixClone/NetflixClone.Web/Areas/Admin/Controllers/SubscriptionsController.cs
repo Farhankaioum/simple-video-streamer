@@ -64,5 +64,54 @@ namespace NetflixClone.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = new SubscriptionEditViewModel();
+            model.GetSubscriptionById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(SubscriptionEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            try
+            {
+                model.EditSubscription();
+                _notyf.Success("Subscription update successful!");
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _notyf.Error(ex.Message);
+                _logger.LogError(ex.Message, ex);
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var model = new SubscriptionIndexViewModel();
+                model.DeleteSubscription(id);
+                _notyf.Success("Subscription delete successful!");
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                _notyf.Error(ex.Message);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

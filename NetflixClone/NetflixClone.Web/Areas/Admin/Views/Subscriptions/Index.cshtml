@@ -31,8 +31,10 @@
                     <td>@category.CreatedAt.ToString("dd MM yyyy")</td>
                     <td>
                         <div class="form-group">
-                            <input type="button" value="Edit" class="btn btn-success" />
-                            <input type="button" value="Delete" class="btn btn-danger mt-2" />
+                            <a class="btn btn-success float-left" asp-controller="Subscriptions" asp-action="Edit" asp-route-id="@category.Id">Edit </a>
+                            <form method="post" asp-controller="Subscriptions" asp-action="Delete" asp-route-id="@category.Id">
+                                <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
                         </div>
                     </td>
                 </tr>

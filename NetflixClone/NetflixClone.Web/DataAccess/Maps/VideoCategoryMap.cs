@@ -7,9 +7,9 @@ namespace NetflixClone.Web.DataAccess.Maps
     {
         public VideoCategoryMap()
         {
+            Table("Categories");
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Name).Not.Nullable();
-            Table("Categories");
         }
     }
 }
