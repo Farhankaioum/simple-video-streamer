@@ -68,6 +68,6 @@ namespace NetflixClone.Web.DataAccess
             runner.MigrateUp();
         }
 
-        private const string ConnectionString = "Server= DESKTOP-812DOMC,49172;Database=NetflixClone3; User Id=sa;Password=123456;MultipleActiveResultSets=true";
+        private const string ConnectionString = "Server= DESKTOP-812DOMC,49172;Database=NetflixClone.DB; User Id=sa;Password=123456;MultipleActiveResultSets=true";
     }
 }

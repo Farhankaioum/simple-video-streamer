@@ -14,10 +14,8 @@ namespace NetflixClone.Web.DataAccess.Maps
             Map(x => x.Description);
             Map(x => x.Url);
             Map(x => x.ReleasedDate);
-
             References(x => x.Category)
                 .Column("CategoryId")
-                .Nullable()
                 .Cascade.All();
         }
     }

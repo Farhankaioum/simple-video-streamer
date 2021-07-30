@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using NetflixClone.Foundation.Entities;
+@using NetflixClone.Foundation.Helpers
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -11,6 +12,13 @@
     @if (SignInManager.IsSignedIn(User))
     {
         var userImage = "/images/user-icon.jpg";
+        @if (SignInManager.IsSignedIn(User) &&
+                      await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), ConstantValue.ADMIN_USER_ROLE))
+        {
+            <li class="nav-item layout-nav">
+                <a class="nav-link text-white" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+            </li>
+        }
 
         <li class="nav-item dropdown layout-nav without-caret-dropdown" style="margin-top:-4px;">
             <a class="nav-link text-white dropdown-toggle social-item" data-toggle="dropdown" title="Your Profile's"
